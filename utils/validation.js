@@ -13,9 +13,14 @@ const loginSchema = z.object({
     password : z.string().min(6).max(20)
 })
 
-
+const postSchema = z.object({
+    title : z.string().min(3).max(200),
+    content : z.string().min(10),
+    categoryId : z.string()
+})
 
 module.exports = {
     registerSchema : registerSchema,
-    loginSchema : loginSchema
+    loginSchema : loginSchema,
+    postSchema : postSchema
 }

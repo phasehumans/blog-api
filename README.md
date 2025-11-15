@@ -1,60 +1,7 @@
 # Ink Well - Blog API
 
-A RESTful API for a blog platform with user authentication, post management, admin reviews, and category management.
+A REST API for a blog platform with user authentication, post management, admin reviews, and category management
 
-## Features
-
-- User authentication with JWT
-- Blog post creation and management
-- Admin post review system (approve/reject)
-- Category management
-- API key generation for programmatic access
-- Password change functionality
-- Pagination on list endpoints
-- Input sanitization
-
-## Setup
-
-### Prerequisites
-
-- Node.js (v14+)
-- MongoDB
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/phasehumans/inkwell.git
-cd inkwell
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Create a `.env` file based on `.env.example`
-```bash
-cp .env.example .env
-```
-
-4. Update `.env` with your configuration
-```
-PORT=5000
-MONGO_URL=your_mongodb_connection_string
-JWT_SECRET=your_secret_key_here
-NODE_ENV=development
-```
-
-5. Start the server
-```bash
-npm start
-```
-
-The server will be running at `http://localhost:5000`
-
-## API Endpoints
 
 ### Health Check
 - `GET /api/v1/health` - Check server status
@@ -99,30 +46,6 @@ The server will be running at `http://localhost:5000`
 └── .env.example        # Environment variables template
 ```
 
-## Architecture Design
-
-### **Layered Architecture**
-
-The application follows a **3-tier layered architecture** pattern:
-
-```
-┌─────────────────────────────────────────┐
-│          Routes Layer                   │
-│  (Express Routers - Request Routing)    │
-├─────────────────────────────────────────┤
-│       Controllers Layer                  │
-│  (Business Logic & Request Handling)    │
-├─────────────────────────────────────────┤
-│    Models Layer (Data Access)           │
-│  (MongoDB Schemas & Database Queries)   │
-├─────────────────────────────────────────┤
-│      Middlewares Layer                  │
-│  (Authentication, Validation, Sanitize) │
-├─────────────────────────────────────────┤
-│        Config & Utils                   │
-│  (Database, Helpers, Validation Rules)  │
-└─────────────────────────────────────────┘
-```
 
 ### **Data Flow**
 
@@ -154,40 +77,8 @@ Models Layer
 Response sent to Client
 ```
 
-### **Component Breakdown**
 
-#### **1. Routes Layer** (`/routes`)
-- Defines API endpoints and HTTP methods
-- Applies middleware (auth, role checks)
-- Routes requests to appropriate controllers
-- Files: `auth.route.js`, `post.route.js`, `admin.route.js`, `category.route.js`
 
-#### **2. Controllers Layer** (`/controllers`)
-- Handles request/response logic
-- Validates input using Zod schemas
-- Implements business rules
-- Calls model methods for data operations
-- Returns structured JSON responses
-- Files: `auth.controller.js`, `post.controller.js`, `admin.controller.js`, `category.controller.js`
-
-#### **3. Models Layer** (`/models`)
-- Defines MongoDB data schemas
-- Manages database collections
-- Handles data validation at schema level
-- Supports relationships via references
-- Files: `users.model.js`, `posts.model.js`, `categories.model.js`, `apikeys.model.js`, `postreviews.model.js`
-
-#### **4. Middleware Layer** (`/middlewares`)
-- **auth.middleware.js** - Verifies JWT tokens, extracts user info
-- **apikey.middleware.js** - Validates API keys for programmatic access
-- **sanitize.middleware.js** - Prevents XSS by sanitizing input
-- **error.middleware.js** - Global error handling (ready to integrate)
-
-#### **5. Utils & Config**
-- **config/db.js** - MongoDB connection management
-- **utils/validation.js** - Zod schemas for input validation
-- **utils/pagination.js** - Pagination helper for list endpoints
-- **utils/apikey.js** - API key generation utility
 
 ### **Authentication Flow**
 
@@ -267,83 +158,36 @@ Populate author & category references
 Return posts with metadata
 ```
 
-### **Access Control Pattern**
 
-```
-Public Routes (No Auth Required)
-├─ GET /health
-├─ GET /posts (approved only)
-├─ GET /posts/:id (approved only)
-└─ GET /categories
+## Setup
 
-User Routes (Auth Required)
-├─ POST /posts
-├─ PUT /posts/:id (own posts only)
-├─ DELETE /posts/:id (own posts only)
-├─ PUT /change-password
-├─ POST /apikey
-└─ PUT /apikey/:id/revoke
+### Installation
 
-Admin Routes (Auth + Admin Role Required)
-├─ GET /admin/posts
-├─ PUT /admin/posts/:id/approve
-├─ PUT /admin/posts/:id/reject
-├─ POST /categories
-├─ PUT /categories/:id
-└─ DELETE /categories/:id
+1. Clone the repository
+```bash
+git clone https://github.com/phasehumans/inkwell.git
+cd inkwell
 ```
 
-### **Error Handling**
-
-- **Validation Errors** (400) - Invalid input or missing fields
-- **Authentication Errors** (401/403) - Invalid token or insufficient permissions
-- **Not Found Errors** (404) - Resource doesn't exist
-- **Conflict Errors** (409) - Duplicate entries or unique constraint violations
-- **Server Errors** (500) - Unexpected errors
-
-### **Database Schema Relationships**
-
-```
-User (1) ──→ (Many) Posts
-User (1) ──→ (Many) ApiKeys
-Post (Many) ──→ (1) User (author)
-Post (Many) ──→ (1) Category
-Category (1) ──→ (Many) Posts
-PostReview (Many) ──→ (1) Post
-PostReview (Many) ──→ (1) User (reviewer)
+2. Install dependencies
+```bash
+npm install
 ```
 
-### **Security Features**
+3. Create a `.env` file based on `.env.example`
+```bash
+cp .env.example .env
+```
 
-- ✅ JWT-based authentication
-- ✅ Role-based access control (RBAC)
-- ✅ Bcrypt password hashing (10 salt rounds)
-- ✅ Input sanitization (XSS prevention)
-- ✅ API key hashing with SHA-256
-- ✅ Environment variable validation
-- ✅ CORS enabled for cross-origin requests
+4. Update `.env` with your configuration
+```
+PORT=5000
+MONGO_URL=your_mongodb_connection_string
+JWT_SECRET=your_secret_key_here
+NODE_ENV=development
+```
 
-## Environment Variables
-
-- `PORT` - Server port (default: 5000)
-- `MONGO_URL` - MongoDB connection string (required)
-- `JWT_SECRET` - JWT secret key (required)
-- `NODE_ENV` - Environment (development/production)
-
-## Technologies
-
-- Express.js - Web framework
-- MongoDB - Database
-- Mongoose - ODM
-- JWT - Authentication
-- Bcrypt - Password hashing
-- Zod - Schema validation
-- Cors - Cross-origin requests
-
-## License
-
-ISC
-
-## Author
-
-Phase Humans
+5. Start the server
+```bash
+npm start
+```

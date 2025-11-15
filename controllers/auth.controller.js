@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
     }
 
     try {
-        const hashPassword = await bcrypt.hash(password, 5)
+        const hashPassword = await bcrypt.hash(password, 10)
         await UserModel.create({
             firstName : firstName,
             lastName : lastName,
@@ -81,7 +81,7 @@ const registerAdmin = async (req, res) => {
     }
 
     try {
-        const hashPassword = await bcrypt.hash(password, 5)
+        const hashPassword = await bcrypt.hash(password, 10)
         await UserModel.create({
             firstName : firstName,
             lastName : lastName,
@@ -112,6 +112,8 @@ const login = async (req, res) => {
         })
     }
 
+    const { email, password } = parseData.data
+
     const user = await UserModel.findOne({
         email : email
     })
@@ -127,13 +129,17 @@ const login = async (req, res) => {
     
         if(passwordCompare){
             const token = jwt.sign({
-                _id : user.id,
+                _id : user._id,
                 role : user.role
             }, process.env.JWT_SECRET)
     
             res.status(200).json({
                 message : "login-in successfull",
                 token : token
+            })
+        } else {
+            return res.status(401).json({
+                message : "invalid password"
             })
         }
     } catch (error) {
@@ -173,10 +179,10 @@ const getProfile = async (req, res ) => {
 }
 
 const generateApiKey = async (req, res) => {
-    const userid = req.body
+    const userid = req.userid
 
     const rawkey = generateAPI()
-    const hashedKey = crypto.createHash("sha256").update(rawkey).digest("hex");
+    const hashedKey = require('crypto').createHash("sha256").update(rawkey).digest("hex");
 
     try {
         await ApiKeyModel.create({
@@ -195,8 +201,96 @@ const generateApiKey = async (req, res) => {
             error : error.message
         })
     }
+}
 
+const changePassword = async (req, res) => {
+    const userid = req.userid
+    const { oldPassword, newPassword, confirmPassword } = req.body
 
+    if (!oldPassword || !newPassword || !confirmPassword) {
+        return res.status(400).json({
+            message : "all fields are required"
+        })
+    }
+
+    if (newPassword !== confirmPassword) {
+        return res.status(400).json({
+            message : "new passwords do not match"
+        })
+    }
+
+    if (newPassword.length < 6 || newPassword.length > 20) {
+        return res.status(400).json({
+            message : "password must be between 6-20 characters"
+        })
+    }
+
+    try {
+        const user = await UserModel.findById(userid)
+
+        if (!user) {
+            return res.status(404).json({
+                message : "user not found"
+            })
+        }
+
+        const passwordMatch = await bcrypt.compare(oldPassword, user.password)
+
+        if (!passwordMatch) {
+            return res.status(401).json({
+                message : "old password is incorrect"
+            })
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10)
+
+        await UserModel.findByIdAndUpdate(userid, {
+            password : hashedPassword
+        })
+
+        res.status(200).json({
+            message : "password changed successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            message : "internal server error",
+            error : error.message
+        })
+    }
+}
+
+const revokeApiKey = async (req, res) => {
+    const keyId = req.params.id
+    const userid = req.userid
+
+    try {
+        const apiKey = await ApiKeyModel.findById(keyId)
+
+        if (!apiKey) {
+            return res.status(404).json({
+                message : "api key not found"
+            })
+        }
+
+        if (apiKey.createdby.toString() !== userid) {
+            return res.status(403).json({
+                message : "you can only revoke your own api keys"
+            })
+        }
+
+        await ApiKeyModel.findByIdAndUpdate(keyId, {
+            active : false
+        })
+
+        res.status(200).json({
+            message : "api key revoked successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            message : "internal server error",
+            error : error.message
+        })
+    }
 }
 
 module.exports = {
@@ -204,6 +298,7 @@ module.exports = {
     registerAdmin : registerAdmin,
     login : login,
     getProfile : getProfile,
-    generateApiKey : generateApiKey
-
+    generateApiKey : generateApiKey,
+    changePassword : changePassword,
+    revokeApiKey : revokeApiKey
 }

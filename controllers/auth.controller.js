@@ -271,7 +271,17 @@ const revokeApiKey = async (req, res) => {
     // console.log(userid)
 
     try {
-        const apiKey = await ApiKeyModel.findById(keyId)
+        const hashedKey = require("crypto")
+          .createHash("sha256")
+          .update(keyId)
+          .digest("hex");
+
+
+        const apiKey = await ApiKeyModel.findOne({
+            key : hashedKey
+        })
+
+        // console.log(apiKey)
 
         if (!apiKey) {
             return res.status(404).json({
@@ -285,7 +295,13 @@ const revokeApiKey = async (req, res) => {
             })
         }
 
-        await ApiKeyModel.findByIdAndUpdate(keyId, {
+        // apiKey.active = false;
+        // await apiKey.save(); >> hook gd
+
+
+        await ApiKeyModel.findOneAndUpdate({
+            key : hashedKey
+        }, {
             active : false
         })
 

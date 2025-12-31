@@ -2,12 +2,16 @@ const { PostsModel } = require('../models/posts.model')
 const { getPaginationParams } = require('../utils/pagination')
 
 const getAllPendingPosts = async (req, res) => {
+    // console.log(req.role)
     try {
         const { page, limit, skip } = getPaginationParams(req.query)
 
         const posts = await PostsModel.find({
-            status: "pending"
-        }).populate('author').populate('category').skip(skip).limit(limit)
+          status: "pending",
+        }).skip(skip).limit(limit);
+        // .populate('author').populate('category').skip(skip).limit(limit)
+
+        // console.log(posts)
 
         const total = await PostsModel.countDocuments({
             status: "pending"
@@ -67,6 +71,12 @@ const approvePost = async (req, res) => {
 const rejectPost = async (req, res) => {
     const postId = req.params.id
     const { comment } = req.body
+
+    if(!comment){
+        return res.status(400).json({
+            message : "comment is required"
+        })
+    }
 
     try {
         const post = await PostsModel.findById(postId)

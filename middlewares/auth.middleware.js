@@ -5,12 +5,16 @@ dotenv.config()
 
 function authMiddleware (req, res, next){
     const token = req.headers.token
+    // console.log(token)
 
     try {
         const decodeData = jwt.verify(token, process.env.JWT_SECRET)
+
+        // console.log(decodeData._id)
+        // console.log(decodeData.role)
     
         if(decodeData){
-            req.userid = decodeData.id
+            req.userid = decodeData._id
             req.role = decodeData.role
             next()
         }else{

@@ -14,9 +14,10 @@ const registerUser = async (req, res) => {
 
     if(!parseData.success){
         return res.status(400).json({
-            message : "invalid fields",
-            error : parseData.error
-        })
+          message: "invalid fields",
+          // error : parseData.error
+          errors: parseData.error.flatten().fieldErrors,
+        });
     }
 
     const {firstName, lastName, email, password, avatar} = parseData.data
@@ -62,16 +63,17 @@ const registerAdmin = async (req, res) => {
 
     if(!parseData.success){
         return res.status(400).json({
-            message : "invalid fields",
-            error : parseData.error
-        })
+          message: "invalid fields",
+          // error : parseData.error
+          errors: parseData.error.flatten().fieldErrors,
+        });
     }
 
     const {firstName, lastName, email, password, avatar} = parseData.data
 
     const adminExist = await UserModel.findOne({
         email : email,
-        role : "admin"
+        // role : "admin" > diff email for USER && ADMIN
     })
 
     if(adminExist){
@@ -181,6 +183,8 @@ const getProfile = async (req, res ) => {
 const generateApiKey = async (req, res) => {
     const userid = req.userid
 
+    // console.log(userid)
+
     const rawkey = generateAPI()
     const hashedKey = require('crypto').createHash("sha256").update(rawkey).digest("hex");
 
@@ -262,6 +266,9 @@ const changePassword = async (req, res) => {
 const revokeApiKey = async (req, res) => {
     const keyId = req.params.id
     const userid = req.userid
+
+    // console.log(keyId)
+    // console.log(userid)
 
     try {
         const apiKey = await ApiKeyModel.findById(keyId)

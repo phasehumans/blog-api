@@ -1,4 +1,4 @@
-# Ink Well - Blog API
+# Blog API
 
 A REST API for a blog platform with user authentication, post management, admin reviews, and category management
 
@@ -89,7 +89,7 @@ Input Validation (Zod)
       ↓
 Check if email exists
       ↓
-Hash password (bcrypt, salt: 10)
+Hash password
       ↓
 Store in MongoDB
       ↓
@@ -156,38 +156,4 @@ Apply pagination
 Populate author & category references
       ↓
 Return posts with metadata
-```
-
-
-## Setup
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/phasehumans/inkwell.git
-cd inkwell
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Create a `.env` file based on `.env.example`
-```bash
-cp .env.example .env
-```
-
-4. Update `.env` with your configuration
-```
-PORT=5000
-MONGO_URL=your_mongodb_connection_string
-JWT_SECRET=your_secret_key_here
-NODE_ENV=development
-```
-
-5. Start the server
-```bash
-npm start
 ```

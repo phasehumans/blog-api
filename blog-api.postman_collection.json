@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "1aad312e-18e1-4f6e-a707-09675711d73c",
+		"name": "Blog-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43250119"
+	},
+	"item": [
+		{
+			"name": "registerUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM3ZGFlMWJkZWU1MGNkMzVlYThmMDYiLCJpYXQiOjE3NjUzODUwNzl9.Rjhkit5TnD6ihy1CfrbVlKKWb94leP_PGy4kSbYa9_w",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"firstName\" : \"chaitanya\",\r\n   \"lastName\" : \"sonawane\",\r\n   \"email\" : \"chetansonawane@gmail.com\",\r\n   \"password\": \"pass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/register",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerAdmin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"firstName\" : \"chaitanya ADMIN\",\r\n   \"lastName\" : \"sonawane\",\r\n   \"email\" : \"chetanAdmin2@gmail.com\",\r\n   \"password\": \"pass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/register/admin",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n//    \"firstName\" : \"chaitanya ADMIN\",\r\n//    \"lastName\" : \"sonawane\",\r\n   \"email\" : \"chetanAdmin2@gmail.com\",\r\n   \"password\": \"pass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "apikey",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/apikey",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"apikey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "revoke-apikey",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/apikey/eaea9dfde934e52a569105968615caaecb86906f51c4b4360ef0d3bfb6186952/revoke",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"apikey",
+						"eaea9dfde934e52a569105968615caaecb86906f51c4b4360ef0d3bfb6186952",
+						"revoke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/profile",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change-password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oldPassword\" : \"pass123\",\r\n    \"newPassword\" : \"newpass1234\",\r\n    \"confirmPassword\" : \"newpass1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/auth/change-password",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Designing Clean REST APIs with Proper Contracts new new\",\r\n  \"content\": \"Using strict API contracts and validating input early makes backend systems easier to maintain and debug.\",\r\n  \"categoryId\": \"6954d386392e10533ce0c112\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/posts/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPosts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/posts/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPost-byId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/posts/6954d3c3b13d0208a5243f5e",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"6954d3c3b13d0208a5243f5e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePost",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Designing Clean REST APIs with Proper Contracts UPDATE POST\",\r\n  \"content\": \"Using strict API contracts and validating input early makes backend systems easier to maintain and debug.\",\r\n  \"categoryId\": \"6954d386392e10533ce0c112\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/posts/6954e2f5c43b65fac4499dff",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"6954e2f5c43b65fac4499dff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePost",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/posts/6954e1423dcf0b42c9e077c3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"6954e1423dcf0b42c9e077c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-pending-posts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/admin/posts",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approve-post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/admin/posts/6954d4ccb13d0208a5243f61/approve",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"posts",
+						"6954d4ccb13d0208a5243f61",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reject-post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\" : \"not good\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/admin/posts/6954d4d7b13d0208a5243f64/reject",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"posts",
+						"6954d4d7b13d0208a5243f64",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"ai\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/categories/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all categories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\" : \"not good\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/categories/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update category",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"artificial intelligence\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/categories/6954e4d0a13d2bdd73b18b39",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"6954e4d0a13d2bdd73b18b39"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete category",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTU0YWIzZjQxYjU1ZmQwZmUwNDQ5OGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxNTc4NTh9.GrtgqYGCtvPj_sB16M4--DiJ7mUYphQIkPASKVvLuqM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:4000/api/v1/categories/6954e4c9a13d2bdd73b18b36",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"6954e4c9a13d2bdd73b18b36"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

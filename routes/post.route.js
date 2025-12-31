@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const { createPost, getAllPublishedPosts, getPostById, updatePost, deletePost } = require('../controllers/post.controller')
-const { authMiddleware } = require('../middlewares/auth.middleware')
+const { createPost, getAllPublishedPosts, getPostById, updatePost, deletePost } = require('../controllers/post.controller.js')
+const { authMiddleware } = require('../middlewares/auth.middleware.js')
 
 const postRouter = Router()
 

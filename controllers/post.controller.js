@@ -1,6 +1,6 @@
-const { PostsModel } = require('../models/posts.model')
-const { postSchema } = require('../utils/validation')
-const { getPaginationParams } = require('../utils/pagination')
+const { PostsModel } = require('../models/posts.model.js')
+const { postSchema } = require('../utils/validation.js')
+const { getPaginationParams } = require('../utils/pagination.js')
 
 const createPost = async (req, res) => {
     const parseData = postSchema.safeParse(req.body)
@@ -52,9 +52,13 @@ const getAllPublishedPosts = async (req, res) => {
     try {
         const { page, limit, skip } = getPaginationParams(req.query)
 
+        // Pagination is the process of splitting large datasets into smaller pages
+        // using limit and skip to improve performance and scalability
+
         const posts = await PostsModel.find({
-            status: "approved"
-        }).populate('author').populate('category').skip(skip).limit(limit)
+          status: "approved",
+        }).skip(skip).limit(limit);
+        // .populate('author').populate('category').skip(skip).limit(limit)
 
         const total = await PostsModel.countDocuments({
             status: "approved"
@@ -85,7 +89,8 @@ const getPostById = async (req, res) => {
         const post = await PostsModel.findOne({
             _id: postId,
             status: "approved"
-        }).populate('author').populate('category')
+        })
+        // .populate('author').populate('category')
 
         if (!post) {
             return res.status(404).json({

@@ -5,7 +5,7 @@ const registerSchema = z.object({
     lastName : z.string(),
     email : z.string().email(),
     password : z.string().min(6).max(20),
-    avatar : z.string().url()
+    // avatar : z.string().url()
 })
 
 const loginSchema = z.object({

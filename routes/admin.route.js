@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const { getAllPendingPosts, approvePost, rejectPost } = require('../controllers/admin.controller')
-const { authMiddleware } = require('../middlewares/auth.middleware')
+const { getAllPendingPosts, approvePost, rejectPost } = require('../controllers/admin.controller.js')
+const { authMiddleware } = require('../middlewares/auth.middleware.js')
 
 const adminRouter = Router()
 

@@ -56,8 +56,9 @@ const getAllPublishedPosts = async (req, res) => {
         // using limit and skip to improve performance and scalability
 
         const posts = await PostsModel.find({
-            status: "approved"
-        }).populate('author').populate('category').skip(skip).limit(limit)
+          status: "approved",
+        }).skip(skip).limit(limit);
+        // .populate('author').populate('category').skip(skip).limit(limit)
 
         const total = await PostsModel.countDocuments({
             status: "approved"
@@ -88,7 +89,8 @@ const getPostById = async (req, res) => {
         const post = await PostsModel.findOne({
             _id: postId,
             status: "approved"
-        }).populate('author').populate('category')
+        })
+        // .populate('author').populate('category')
 
         if (!post) {
             return res.status(404).json({
